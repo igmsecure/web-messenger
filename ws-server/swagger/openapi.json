@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Messenger API [OpenAPI]",
+    "description": "Messenger Application Level API",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.1.0",
+    "contact": {
+      "name": "Ibragim Dzaurov",
+      "url": "https://github.com/igmsecure",
+      "email": "theigmpro@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Dev server"
+    }
+  ],
+  "paths": {
+    "/reseive": {
+      "post": {
+        "summary": "Метод получения сообщения",
+        "description": "Метод предназначен для получения сообщения с траспортного уровня.",
+        "operationId": "reseiveMessage",
+        "tags": [
+          "Message"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Message"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Подтверждение успешного получения сообщения",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Message": {
+        "type": "object",
+        "required": [
+          "sender",
+          "payload",
+          "time",
+          "isError"
+        ],
+        "properties": {
+          "sender": {
+            "type": "string",
+            "description": "Отправитель сообщения",
+            "example": "Ibragim"
+          },
+          "payload": {
+            "type": "string",
+            "description": "Текст сообщения",
+            "example": "my some message"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Время отправки сообщения (является также идентификатором сообщения)",
+            "example": "2024-02-23T13:45:41Z"
+          },
+          "isError": {
+            "type": "boolean",
+            "description": "Флаг ошибки сообщения"
+          }
+        }
+      }
+    }
+  }
+}
